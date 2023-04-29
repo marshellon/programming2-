@@ -4,7 +4,6 @@
 func = lambda x : x*2 # function for testing
 func2 =  lambda x : x*3 # for fun
 
-
 test_list = [1,2,3,4,5] # the list given be the assignment
 
 def multiplier (List:list, func):
