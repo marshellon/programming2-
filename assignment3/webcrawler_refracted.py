@@ -5,9 +5,9 @@ import re
 
 class Crawler:
     def __init__(self):
+        self.results = []
         self.crawl_site()
-
-    
+        self.current_index = -1
 
     def hack_ssl(self):
         """ ignores the certificate errors"""
@@ -87,35 +87,51 @@ class Crawler:
         """
         Main loop for crawling the site
         """
-        print ('fetch urls')
-        url = "https://sport050.nl/sportaanbieders/alle-aanbieders/"
-        s = self.open_url(url)
+        print('fetch urls')
+        base_url = "https://sport050.nl/sportaanbieders/alle-aanbieders/"
+        self.current_url = base_url
+        s = self.open_url(self.current_url)
         reflist = self.read_hrefs(s)
 
-        print ('getting sub-urls')
+        print('getting sub-urls')
         sub_urls = [s for s in filter(lambda x: '<a href="/sportaanbieders' in str(x), reflist)]
         sub_urls = sub_urls[3:]
 
-        print ('extracting the data')
-        print (f'{len(sub_urls)} sub-urls')
+        print(f'{len(sub_urls)} sub-urls')
 
         for sub in sub_urls:
             try:
                 sub = self.extract(sub)
-                site = url[:-16] + sub
-                soup = self.open_url(site)    
+                site = base_url[:-16] + sub
+                self.current_url = site
+                soup = self.open_url(site)
                 info = self.fetch_sidebar(soup)
                 info = self.read_li(info)
                 phone = self.get_phone(info)
                 phone = self.remove_html_tags(phone).strip()
                 email = self.get_email(info)
-                email = self.remove_html_tags(email).replace("/","")
-                print (f'{site} ; {phone} ; {email}')
+                email = self.remove_html_tags(email).replace("/", "")
+                self.results.append(f'{site} ; {phone} ; {email}')
+                # print(len(self.results))
             except Exception as e:
-                print (e)
+                print(e)
                 exit()
 
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        self.current_index += 1
+        
+        if self.current_index == len(self.results):
+            raise StopIteration
+        return self.results[self.current_index]
+        
 
 
 if __name__ == "__main__":
-    crawler = Crawler() 
+    crawler = Crawler()
+    print(crawler.results)
+    for x in range(5):
+        print (str(next(crawler)))
+    #Result: five lines of data 
