@@ -7,6 +7,12 @@ class Reader:
         self.csv_converter = Csvconverter(self.csv_path)
         self.pos = 2
 
+    def add_observer(self):
+        print("added observer")
+        
+    def remove_observer(self):
+        print("remove observer")
+
     
     def get_lines(self, nr=5):
         lines = [ln.getline(self.csv_path, nr+c) for c  in range(self.pos, self.pos+nr)]

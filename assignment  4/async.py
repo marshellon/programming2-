@@ -13,9 +13,19 @@ class serverHandler(Simplehandler):
         path = [data for data in self.path.split("/") if data]
         try:
             if path[1] == "all":
-                print("dingen doen")
+
+                dp = DataProvider()
+                df = dp.return_all()
+                self.wfile.write(df.encode("UTF-8"))
+
             year_1 = int(path[1])
             print(year_1)
+
+
+            if len(path) == 2:
+                dp = DataProvider()
+                df = dp.return_year(year_1)
+                self.wfile.write(df.encode("UTF-8"))
 
             if len(path) == 3:
                 year_2 = int(path[2])
