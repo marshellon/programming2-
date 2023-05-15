@@ -1,7 +1,7 @@
 # modules
 from Bio import Entrez
 from multiprocessing import Process
-from articleprinter import ArticlcePrinter
+from articleprinter import ArticlePrinter
 import ssl
 
 # keys and utensils
@@ -50,12 +50,13 @@ class ArticleHarvister:
 
 
 if __name__ == "__main__":
+    print('Waiting for the process...')
     harvister = ArticleHarvister()
     dict = harvister.get_file()
-    printer = ArticlcePrinter()
+    printer = ArticlePrinter()
     process = Process(target=printer.printer(dict))
     process.start()
-    print('Waiting for the process...')
+    print('Files printed in folder')
     process.join()
     
     
