@@ -12,7 +12,7 @@ class ArticleHarvister:
     def __init__(self):
         self.artricle_id = input("provide an article ID:")
         Entrez.email = "m.e.martinus@st.hanze.nl"
-        self.api_key = "9d4097e529ca3a68cc0e617f6106e7b8f608"
+        self.api_key = ""
         self.get_file()
 
 
