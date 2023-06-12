@@ -42,7 +42,6 @@ class serverHandler(Simplehandler):
 
 
 
-
 port= 9000
 socketserver.TCPServer.allow_reuse_address= True
 http = socketserver.TCPServer(("localhost",port),serverHandler)
