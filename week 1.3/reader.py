@@ -20,9 +20,9 @@ class Reader:
         return self.csv_converter.csv_to_json(lines)
 
 
-# red = Reader('dSST.csv')
-# print(red.get_lines()) #returns lines 2-6 as json
-# print("###########################################")
-# print(red.get_lines()) #returns lines 7-11 as json
-# print("###########################################")
-# print(red.get_lines()) #returns lines 12-16 as json 
+red = Reader('dSST.csv')
+print(red.get_lines()) #returns lines 2-6 as json
+print("###########################################")
+print(red.get_lines()) #returns lines 7-11 as json
+print("###########################################")
+print(red.get_lines()) #returns lines 12-16 as json 
