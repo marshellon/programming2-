@@ -1,46 +1,37 @@
+import pandas as pd
 import asyncio
-import aiohttp
 
 class NetworkClient:
-    def __init__(self, base_url):
-        self.base_url = base_url
+    def __init__(self, url):
+        self.url = url
+        self.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        self.data = pd.read_csv("dSST.csv")
+        self.process_data()
+    
+    def process_data(self):
+        base_url = [info for info in self.url.split("/") if info]
 
-    async def fetch_data(self, endpoint, callback):
-        url = self.base_url + endpoint
+        if len(base_url) == 2:
+            year = int(base_url[1])
+            df = self.data.loc[self.data["Year"] == year]
+            temp_means = self.calculate_mean(df)
+            asyncio.run(self.print_means(temp_means))
 
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url) as response:
-                data = await response.json()
-                result = await callback(data)
-                return result
+        elif len(base_url) == 3:
+            year1, year2 = int(base_url[1]), int(base_url[2])
+            df = self.data.loc[self.data["Year"] >= year1].loc[self.data['Year'] <= year2]
+            temp_means = self.calculate_mean(df)
+            asyncio.run(self.print_means(temp_means))
 
-async def process_data(data):
-    # Process the received data and calculate the average temperature
-    years = data.keys()
-    temperatures = []
+    def calculate_mean(self, df):
+        temp_mean = []
+        for month in df.columns:
+            if month in self.months:
+                temp_mean.append(df[month].sum() / len(df[month]))
+        return temp_mean
 
-    for year in years:
-        temperature = data[year]['J-D']  # Access the temperature value
-        temperatures.append(temperature)
-
-    average_temperature = sum(temperatures) / len(temperatures)
-
-    return {'average_temperature': average_temperature}
-
-async def main():
-    base_url = "http://localhost:9000/data/"
-    client = NetworkClient(base_url)
-
-    # Define the list of endpoint calls to be made
-    # endpoints = ["all", "year/2019", "year/2020"]
-    endpoints = [info for info in base_url.split("/") if info]
-    # Gather the results of all the endpoint calls
-    tasks = [client.fetch_data(endpoint, process_data) for endpoint in endpoints]
-    results = await asyncio.gather(*tasks)
-
-    # Print the results
-    for result in results:
-        print(result)
-
-# Run the asyncio event loop
-asyncio.run(main())
+    async def print_means(self, temp_means):
+        z = zip(self.months, temp_means)
+        for month, temp in z:
+            print(f"{month}. Mean temp = {temp:.02f}")
+            await asyncio.sleep(0.1)

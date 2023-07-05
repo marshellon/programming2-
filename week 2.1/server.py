@@ -27,6 +27,7 @@ class ServerHandler(Simplehandler):
                 year_2 = int(info[2])
                 prov = Provider()
                 json_data = prov.return_year(year_1,year_2)
+                NetworkClient(self.path)
                 self.send_response(200)
                 self.send_header('Content-type', 'application/json')
                 self.end_headers()
@@ -35,6 +36,7 @@ class ServerHandler(Simplehandler):
             else:
                 prov = Provider()
                 json_data = prov.return_year(year_1)
+                NetworkClient(self.path)
                 self.send_response(200)
                 self.send_header('Content-type', 'application/json')
                 self.end_headers()

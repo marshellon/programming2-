@@ -26,7 +26,7 @@ class Provider:
                 Json file type to the remote server
         '''
         if len(years) == 1:
-            df = self.df.loc[self.df["Year"] >= years[0]]
+            df = self.df.loc[self.df["Year"] == years[0]]
             df_t = df.T
             return df_t.to_json()
         if len(years) == 2:
