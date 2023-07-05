@@ -30,7 +30,7 @@ class Csvconverter:
                 assert len(self.header) == len(line)
                 json.append({h:line[c] for c,h in enumerate(self.header)})
             except AssertionError:
-                print(f"Sukkel het werkt niet gassie. regel {line}  met regel nummer {c} is niet heeft niet zelde lengte")
+                print(f"Sukkel het werkt niet gassie. regel {line}  met regel nummer {c} is heeft niet zelde lengte")
         return json
 
 

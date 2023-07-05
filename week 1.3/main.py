@@ -47,7 +47,7 @@ class TemperaturePlotter:
                     individual_temp_list_month.append(temperature)
 
             plt.plot(individual_temp_list_month)
-            plt.grid()
+            plt.grid()s
             plt.title("Average temperature per month per 5 years")
             plt.show()
 
