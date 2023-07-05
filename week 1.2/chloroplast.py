@@ -5,40 +5,71 @@ class Chloroplast:
     def __init__(self):
         self.water = 0
         self.co2 = 0
-    
-    def add_molecule(self,molecule:Molecule):
-        molecule = str(molecule)
+
+    def add_molecule(self, molecule):
         try:
-            if molecule == "H2O":
+            if molecule == water:
                 self.water += 1
-            elif molecule == "CO2":
-                self.co2 +=  1 
-        except: ValueError("not a water or carbon molecule")
-
-        if self.water > 6 and self.co2 > 12:
-            self.photosyntese()
-
-    def photosyntese(self):
-        sugar_molecules = []
-
-        self.co2 -= 12
-        self.water -= 6
-
-        hydrogen = Atom('H', 1, 1)
-        carbon = Atom('C', 6, 6)
-        oxygen = Atom('O', 8, 8)
-
-        sugar  = Molecule( [ (carbon,6), (hydrogen, 12) ,oxygen,6 ] )
-        for _ in range(6):
-           sugar_molecules.append(Molecule( [ (oxygen,2) ]))
+            elif molecule == co2:
+                self.co2 += 1
+            else:
+                raise ValueError('Is niet goed dude!!!!!')
+        except: TypeError
         
-        sugar_molecules.append(sugar)
-        print(f"amount of CO2:{self.add_molecule}. Amount of water:{self.water}")
-        print(sugar_molecules)
-
-
-        
+        if self.water >= 12 & self.co2 >= 6:
+            self.photosynthesis()
+            print(" Starting photosynthesis")
+        else:
+            return []
     
+    def photosynthesis(self):
+
+        self.water = self.water - 12
+        self.co2 = self.co2 - 6
+        oxygen = Atom('O', 8, 8)
+        glucose = Molecule([(carbon, 6), (hydrogen, 12), (oxygen, 6)])
+        O = Molecule([(oxygen,2)])
+
+        print([(glucose, 1), (O, 6)])
+
+    def __str__(self):
+        print("The amount of water and CO2")
+        return f'Water: {self.water}\nCO2: {self.co2}'
+
+
+
+
+
+
+
+
+#######################################################
+hydrogen = Atom('H', 1, 1)
+carbon = Atom('C', 6, 6)
+oxygen = Atom('O', 8, 8)
+
+water = Molecule( [ (hydrogen, 2), (oxygen, 1) ] )
+co2 = Molecule( [ (carbon, 1), (oxygen, 2) ])
+demo = Chloroplast()
+els = [water, co2]
+
+while (True):
+    print ('\nWhat molecule would you like to add?')
+    print ('[1] Water')
+    print ('[2] carbondioxyde')
+    print ('Please enter your choice: ', end='')
+    try:
+        choice = int(input())
+        res = demo.add_molecule(els[choice-1])
+        if (len(res)==0):
+            print (demo)
+        else:
+            print ('\n=== Photosynthesis!')
+            print (res)
+            print (demo)
+
+    except Exception:
+        print ('\n=== That is not a valid choice.')   
 
 
 
