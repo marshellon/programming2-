@@ -18,6 +18,7 @@ The dependencies and packages necessary to run the programs are listed below.
 - Matplotlib v3.6 (or later)
 
 If one of these packages is missing, install it with.
+
 ` pip instal <package name>`
 
 -------
