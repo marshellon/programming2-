@@ -9,6 +9,16 @@ class TemperaturePlotter:
         self.plot_type = plot_type
 
     def plot_temperature(self):
+        """
+        function:   
+                 Plot the mean of the temperture per 5 years of the data
+
+        input:
+                NAN specified in __init__
+        output:
+                Plot of the data
+        """
+
         if self.plot_type == "1":
             av = AverageYear(self.data_route)
             f = open(self.data_route, "r")
