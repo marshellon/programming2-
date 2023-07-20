@@ -1,3 +1,5 @@
+<!-- Nice to have this kind of readme's to describe the repo's -->
+
 # Week 1.2
 
 This curriculum examines the photosynthetic process in plants.

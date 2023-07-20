@@ -8,6 +8,10 @@ class Csvconverter:
         """
         reads the header of the csv file
         """
+        
+        # You should not just open the file. This reads the whole file into memory, and 
+        # if that file would be a few gigs of size, you will be in trouble
+
         with open (self.csv_path, "r") as file:
             header = file.readline().split(",")
         return header 

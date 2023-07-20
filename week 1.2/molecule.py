@@ -15,6 +15,9 @@ class Molecule:
         return molecule
         
     def __add__(self,other):
+        # This is incorrect
+        # The add-method shoud return a new Molecule. In your realisation you
+        # just return a string.
         return self.__str__() + other.__str__()
 
 

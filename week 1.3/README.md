@@ -1,11 +1,11 @@
 # Week 1.3
 This application will generate plots based on the year or the month.
 
-## Dependicies: 
+## Dependencies: 
 - dSST.csv: csv file with weather data.
 - matplotlib v3.6 (or later)
 
-# usage
+# Usage
 Run the main.py 
 set the data route and pick the data that ypu want to plot choices: 1 for year. 2 for month
 

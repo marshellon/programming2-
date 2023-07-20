@@ -5,6 +5,11 @@ import os
 import logging
 from sklearn.preprocessing import StandardScaler
 
+# This class does a lot of things; how does that relate to the SOLID principles?
+# You call it 'the juice', which I understand as it has kind of all the required functionality.
+
+# Apart from the logging, I am missing the actual *training* of the model, the `application.json`
+# which should contain all the application settings and the cleaning up when the file has been processed.
 class Drawer:
     def __init__(self,file):
         self.model = load("model.joblib")
@@ -83,6 +88,7 @@ class Drawer:
         
 
     def create_log_file(self,name):
+        # You are creating a logger, but I don't see any use of it in this class...
         log_file_name = f"{name}.log"
         log_file_path = os.path.join("C:/Users/marsh/Desktop/programming2/week 2.7/log", log_file_name)
 

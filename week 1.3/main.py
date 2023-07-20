@@ -3,6 +3,7 @@ from avarageYear import AverageYear
 from averageMonth import AverageMonth
 import sys
 
+# Good to abstract away the common code of both kinds of plotters.
 class TemperaturePlotter:
     def __init__(self, data_route, plot_type):
         self.data_route = data_route

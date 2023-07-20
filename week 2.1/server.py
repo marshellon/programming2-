@@ -1,6 +1,6 @@
 import socketserver
 from http.server import  SimpleHTTPRequestHandler as Simplehandler
-import pandas as pd
+import pandas as pd # unused import (it would have been bad if you actually used pandas in this class)
 from networkclient import NetworkClient
 from provider import Provider
 
@@ -14,7 +14,12 @@ class ServerHandler(Simplehandler):
         info = [data for data in self.path.split("/") if data]
         try:
             if info[1] == "all":
-                prov = Provider()
+                # Why not make the Provider in the initializer of this class?
+                # Now you make new object for every request, even though it 
+                # is basically immutable.
+                # Also, you are making the same object independent of the enclosing 
+                # `if`-statement, so you could have done that before the `if`
+                prov = Provider() 
                 json_data = prov.return_all()
                 self.send_response(200)
                 self.send_header('Content-type', 'application/json')
@@ -27,6 +32,11 @@ class ServerHandler(Simplehandler):
                 year_2 = int(info[2])
                 prov = Provider()
                 json_data = prov.return_year(year_1,year_2)
+                # Why are you creating a NetworkClient here (and in the other route)
+                # (and not doing anything with the returned object)?
+                # That object processes the data... I think this
+                # displays a fundamental misunderstanding of how
+                # network operations work...
                 NetworkClient(self.path)
                 self.send_response(200)
                 self.send_header('Content-type', 'application/json')
@@ -47,6 +57,8 @@ class ServerHandler(Simplehandler):
 
 
         
+# In this architecture it is imperative that you encapsulate the actual running within
+# the main-scope.
 
 port= 9000
 socketserver.TCPServer.allow_reuse_address= True

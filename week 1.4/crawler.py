@@ -10,6 +10,7 @@ class WebCrawler:
         self.pointer = 0
         self.sub_urls = []
 
+    # Good observeration that this method could be made static
     @staticmethod
     def hack_ssl():
         """Ignores the certificate errors"""
@@ -28,6 +29,8 @@ class WebCrawler:
         soup = BeautifulSoup(html, 'html.parser')
         return soup
 
+    # Good observation that all these methods could be made static. 
+    # It would even be better is you hade refactored them into their own scope.
     @staticmethod
     def read_hrefs(soup):
         """Get a list of anchor tags from the BeautifulSoup object, get the href keys, and print them.
@@ -102,6 +105,7 @@ class WebCrawler:
         self.sub_urls = [s for s in filter(lambda x: '<a href="/sportaanbieders' in str(x), reflist)]
         self.sub_urls = self.sub_urls[3:]
 
+    #Good
     def __iter__(self):
         return self
 
@@ -117,6 +121,9 @@ class WebCrawler:
             email = self.get_email(info)
             email = self.remove_html_tags(email).replace("/", "")
             self.pointer += 1
+            # Should this not be `yield` instead of `return`?
+            # Now you delegate the administration of the state of the 
+            # iterator to the using client.
             return f'{site} ; {phone} ; {email}'
         else:
             raise StopIteration

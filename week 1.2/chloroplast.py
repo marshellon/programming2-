@@ -28,8 +28,14 @@ class Chloroplast:
         self.co2 = self.co2 - 6
         oxygen = Atom('O', 8, 8)
         glucose = Molecule([(carbon, 6), (hydrogen, 12), (oxygen, 6)])
-        O = Molecule([(oxygen,2)])
+        O = Molecule([(oxygen,2)]) # Should have called this variable oxygen.
+                                   # Also, I have seen exactly this in the elaboration
+                                   # of Mahdiye Nabilou 🤔
 
+        # Incorrect
+        # the method should *return* this list, not just print it.
+        # Now your `add_molecule` has two return types: an (always empty) list
+        # and None.
         print([(glucose, 1), (O, 6)])
 
     def __str__(self):
