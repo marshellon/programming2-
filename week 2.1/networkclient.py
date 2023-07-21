@@ -2,7 +2,7 @@ import pandas as pd
 import asyncio
 
 class NetworkClient:
-    def __init__(self, url):
+    def __init__(self,url):
         self.url = url
         self.months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         self.data = pd.read_csv("dSST.csv")
