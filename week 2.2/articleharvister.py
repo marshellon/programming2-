@@ -12,10 +12,9 @@ class ArticleHarvister:
     def __init__(self):
         self.artricle_id = input("provide an article ID:")
         Entrez.email = "m.e.martinus@st.hanze.nl"
+        # Good to have your api key not in your repo
         self.api_key = ""
         self.get_file()
-
-
 
     def get_file(self):
         """
@@ -54,6 +53,8 @@ if __name__ == "__main__":
     harvister = ArticleHarvister()
     dict = harvister.get_file()
     printer = ArticlePrinter()
+    # Ok. Good that you have abstracted away the actual printing of the file
+    # into its own class. 
     process = Process(target=printer.printer(dict))
     process.start()
     print('Files printed in folder')

@@ -1,3 +1,5 @@
+# Good
+
 class Atom:
     def __init__(self,symbol,atomic_number,neutrons):
         self.atomic_number = atomic_number

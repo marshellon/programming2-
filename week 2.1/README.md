@@ -10,8 +10,8 @@ VScode or pycharm can be used to start the server.
 As a default, use localhost:9000
 
 The url is similar to a search bar;
- type `/data/all` for all data, or `/data/year>/year>` for data between the specified years. 
-`/data/year` for information from that particular year
+ type `/data/all` for all data, or `/data/<year>/<year>` for data between the specified years. 
+`/data/<year>` for information from that particular year
 
 
 

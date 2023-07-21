@@ -13,10 +13,15 @@ class Reader:
     def remove_observer(self):
         print("remove observer")
 
+    # I am missing the `notify_observers` method: how do you notify the 
+    # observers of a change in the state of this class?
+
     
     def get_lines(self, nr=5):
         lines = [ln.getline(self.csv_path, nr+c) for c  in range(self.pos, self.pos+nr)]
         self.pos += nr
+        # Who are you returning this to?
+        # This is not the way an observable is supposed to work.
         return self.csv_converter.csv_to_json(lines)
 
 

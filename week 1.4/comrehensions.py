@@ -4,6 +4,7 @@ class List_composition:
         self.functions = functions
 
     def composition(self):
+        # Could have been a oneliner, but ok.
         results = []
         for func in self.functions:
             results.append([func(x) for x in self.data])

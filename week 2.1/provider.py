@@ -1,5 +1,6 @@
 import pandas as  pd
 
+#Nice, simple and very readable data-layer.
 class Provider:
     def __init__(self):
         self.df = pd.read_csv("dSST.csv")
